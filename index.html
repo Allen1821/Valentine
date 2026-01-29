@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💙</title>
+    <!-- 
+    ==========================================
+    IMPORTANT: FILE SETUP INSTRUCTIONS
+    ==========================================
+    Make sure these files are in the SAME folder as this HTML file:
+    - image_3.jpg (for envelope and photocard 1)
+    - image_4.jpg (for photocard 2)
+    - image_5.jpg (for photocard 3)
+    - image_6.jpg (for photocard 4)
+    - image_7.jpg (for photocard 5)
+    - image_8.jpg (for photocard 6)
+    
+    Your folder should look like:
+    C:\Users\ahngu\Desktop\Valentine\
+        ├── index.html (this file)
+        ├── image_3.jpg
+        ├── image_4.jpg
+        ├── image_5.jpg
+        ├── image_6.jpg
+        ├── image_7.jpg
+        └── image_8.jpg
+    
+    If images still don't show:
+    1. Check that image file names match EXACTLY (case-sensitive)
+    2. Open browser console (F12) to see any error messages
+    3. Try opening the HTML file directly by double-clicking it
+    ==========================================
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Libre+Baskerville:ital@0;1&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --baby-blue: #B4D4E1;
+            --light-blue: #D8E9F0;
+            --accent-blue: #8BC6DB;
+            --cream: #FFF8F0;
+            --rose: #FFB6C1;
+            --gold: #D4AF37;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-blue) 50%, var(--baby-blue) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Photo Cards Background */
+        .photocard-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            overflow: hidden;
+        }
+
+        .photocard {
+            position: absolute;
+            width: 120px;
+            height: 160px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            padding: 8px;
+            opacity: 0.9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            z-index: 50;
+        }
+
+        .photocard:hover {
+            opacity: 1;
+            transform: scale(1.15) !important;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+            z-index: 150;
+        }
+
+        .photocard-inner {
+            width: 100%;
+            height: 80%;
+            background: var(--baby-blue);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            pointer-events: none;
+        }
+
+        .photocard-inner img {
+            pointer-events: none;
+        }
+
+        .photocard-caption {
+            margin-top: 6px;
+            font-size: 9px;
+            text-align: center;
+            color: #666;
+            font-family: 'Dancing Script', cursive;
+            pointer-events: none;
+        }
+
+        .photocard:nth-child(1) { 
+            top: 10%; 
+            left: 5%; 
+            animation: floatAround1 15s infinite ease-in-out;
+        }
+        .photocard:nth-child(2) { 
+            top: 60%; 
+            left: 8%; 
+            animation: floatAround2 18s infinite ease-in-out;
+        }
+        .photocard:nth-child(3) { 
+            top: 30%; 
+            right: 10%; 
+            animation: floatAround3 20s infinite ease-in-out;
+        }
+        .photocard:nth-child(4) { 
+            top: 75%; 
+            right: 5%; 
+            animation: floatAround4 16s infinite ease-in-out;
+        }
+        .photocard:nth-child(5) { 
+            top: 45%; 
+            left: 15%; 
+            animation: floatAround5 19s infinite ease-in-out;
+        }
+        .photocard:nth-child(6) { 
+            top: 20%; 
+            right: 20%; 
+            animation: floatAround6 17s infinite ease-in-out;
+        }
+
+        @keyframes floatAround1 {
+            0%, 100% { transform: translate(0px, 0px) rotate(-2deg); }
+            25% { transform: translate(30px, -40px) rotate(2deg); }
+            50% { transform: translate(-20px, -30px) rotate(-1deg); }
+            75% { transform: translate(15px, -20px) rotate(1deg); }
+        }
+
+        @keyframes floatAround2 {
+            0%, 100% { transform: translate(0px, 0px) rotate(1deg); }
+            25% { transform: translate(-25px, -35px) rotate(-2deg); }
+            50% { transform: translate(20px, -45px) rotate(2deg); }
+            75% { transform: translate(-15px, -25px) rotate(-1deg); }
+        }
+
+        @keyframes floatAround3 {
+            0%, 100% { transform: translate(0px, 0px) rotate(-1deg); }
+            25% { transform: translate(-30px, -30px) rotate(1deg); }
+            50% { transform: translate(25px, -50px) rotate(-2deg); }
+            75% { transform: translate(-20px, -35px) rotate(2deg); }
+        }
+
+        @keyframes floatAround4 {
+            0%, 100% { transform: translate(0px, 0px) rotate(2deg); }
+            25% { transform: translate(35px, -25px) rotate(-1deg); }
+            50% { transform: translate(-30px, -40px) rotate(1deg); }
+            75% { transform: translate(20px, -30px) rotate(-2deg); }
+        }
+
+        @keyframes floatAround5 {
+            0%, 100% { transform: translate(0px, 0px) rotate(-2deg); }
+            25% { transform: translate(-20px, -50px) rotate(2deg); }
+            50% { transform: translate(30px, -35px) rotate(-1deg); }
+            75% { transform: translate(-25px, -20px) rotate(1deg); }
+        }
+
+        @keyframes floatAround6 {
+            0%, 100% { transform: translate(0px, 0px) rotate(1deg); }
+            25% { transform: translate(25px, -45px) rotate(-2deg); }
+            50% { transform: translate(-35px, -30px) rotate(2deg); }
+            75% { transform: translate(30px, -40px) rotate(-1deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(2deg); }
+            50% { transform: translateY(-10px) rotate(-2deg); }
+            75% { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Envelope Section */
+        .envelope-wrapper {
+            perspective: 1000px;
+            margin-bottom: 40px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            transition: all 1s ease;
+            display: block;
+            pointer-events: auto;
+        }
+
+        .envelope-wrapper.hide {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+            pointer-events: none;
+        }
+
+        .envelope {
+            width: 320px;
+            height: 200px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .envelope:hover {
+            transform: scale(1.08);
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--cream);
+            border: 3px solid var(--baby-blue);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .envelope-back::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        /* Photo Card Modal */
+        .photocard-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .photocard-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .photocard-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            transform: scale(0.7);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .photocard-modal.show .photocard-modal-content {
+            transform: scale(1);
+        }
+
+        .photocard-modal-image {
+            max-width: 600px;
+            max-height: 70vh;
+            border-radius: 10px;
+        }
+
+        .photocard-modal-placeholder {
+            width: 400px;
+            height: 500px;
+            background: var(--light-blue);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-blue);
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .photocard-modal-caption {
+            margin-top: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: var(--accent-blue);
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background: var(--baby-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 3px solid white;
+        }
+
+        .modal-close:hover {
+            background: var(--accent-blue);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--baby-blue) 50%, var(--light-blue) 50%);
+            border: 3px solid var(--baby-blue);
+            border-radius: 8px;
+            transform-origin: top;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .envelope-front::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 100px solid var(--accent-blue);
+        }
+
+        .envelope.open .envelope-front {
+            transform: rotateX(-180deg);
+        }
+
+        .letter {
+            position: absolute;
+            width: 85%;
+            height: 140px;
+            left: 7.5%;
+            top: 30px;
+            background: white;
+            border: 2px solid var(--rose);
+            border-radius: 8px;
+            padding: 15px;
+            z-index: 2;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), top 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .envelope.open .letter {
+            top: -80px;
+            transform: translateY(-30px) scale(1.05);
+        }
+
+        .letter-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .letter-placeholder {
+            color: var(--baby-blue);
+            font-family: 'Dancing Script', cursive;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Heart Decorations on Envelope */
+        .envelope-heart {
+            position: absolute;
+            color: var(--rose);
+            font-size: 24px;
+            z-index: 4;
+        }
+
+        .heart-1 { top: 10px; right: 20px; }
+        .heart-2 { bottom: 15px; left: 20px; }
+
+        /* Instructions */
+        .instruction {
+            font-family: 'Dancing Script', cursive;
+            color: var(--accent-blue);
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: gentlePulse 3s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.05);
+            }
+        }
+
+        /* Main Content */
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 3px solid var(--baby-blue);
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .content.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .content-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: var(--baby-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .content-close:hover {
+            background: var(--accent-blue);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: var(--accent-blue);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .flower-bouquet {
+            margin: 20px 0;
+            animation: sway 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flower-bouquet img {
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .message {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        button {
+            font-family: 'Libre Baskerville', serif;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .yes-btn {
+            background: var(--baby-blue);
+            color: white;
+        }
+
+        .yes-btn:hover {
+            background: var(--accent-blue);
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 198, 219, 0.5);
+        }
+
+        .no-btn {
+            background: var(--cream);
+            color: #888;
+            border: 2px solid #ddd;
+        }
+
+        .no-btn:hover {
+            background: #f0f0f0;
+            transform: scale(0.98);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px solid var(--baby-blue);
+            z-index: 100;
+        }
+
+        .music-icon {
+            font-size: 24px;
+            animation: rotate 4s linear infinite;
+        }
+
+        .music-player.paused .music-icon {
+            animation-play-state: paused;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .music-text {
+            font-family: 'Dancing Script', cursive;
+            color: var(--accent-blue);
+            font-size: 16px;
+            min-width: 80px;
+        }
+
+        .music-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.2s;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* Volume Slider */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-icon {
+            font-size: 18px;
+            color: var(--accent-blue);
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 5px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--light-blue);
+            outline: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: var(--baby-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            background: var(--accent-blue);
+            transform: scale(1.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: var(--baby-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .volume-slider::-moz-range-thumb:hover {
+            background: var(--accent-blue);
+            transform: scale(1.2);
+        }
+
+        /* Response Section */
+        .response {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .response.show {
+            display: block;
+        }
+
+        .response.yes-response {
+            background: var(--light-blue);
+            color: var(--accent-blue);
+        }
+
+        .response.no-response {
+            background: #ffe6e6;
+            color: #ff6b6b;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Floating Hearts */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0;
+            animation: floatUp 4s ease-in infinite;
+        }
+
+        @keyframes floatUp {
+            0% { 
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+            10% { 
+                opacity: 1;
+                transform: translateY(-50px) scale(1);
+            }
+            90% { 
+                opacity: 1;
+                transform: translateY(-600px) scale(1);
+            }
+            100% { 
+                opacity: 0;
+                transform: translateY(-700px) scale(0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .content { padding: 30px 20px; }
+            .buttons { flex-direction: column; }
+            .envelope { transform: scale(0.9); }
+            .photocard { width: 80px; height: 110px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Photo Cards Background -->
+    <div class="photocard-container">
+        <div class="photocard" onclick="openPhotoModal(1)">
+            <div class="photocard-inner">
+                <img src="image_3.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" alt="Memory 1" onerror="this.style.display='none'; this.parentElement.innerHTML='Image not found<br>image_3.jpg';">
+            </div>
+            <div class="photocard-caption">Memory 1</div>
+        </div>
+        <div class="photocard" onclick="openPhotoModal(2)">
+            <div class="photocard-inner">
+                <img src="image_4.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" alt="Memory 2" onerror="this.style.display='none'; this.parentElement.innerHTML='Image not found<br>image_4.jpg';">
+            </div>
+            <div class="photocard-caption">Memory 2</div>
+        </div>
+        <div class="photocard" onclick="openPhotoModal(3)">
+            <div class="photocard-inner">
+                <img src="image_5.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" alt="Memory 3" onerror="this.style.display='none'; this.parentElement.innerHTML='Image not found<br>image_5.jpg';">
+            </div>
+            <div class="photocard-caption">Memory 3</div>
+        </div>
+        <div class="photocard" onclick="openPhotoModal(4)">
+            <div class="photocard-inner">
+                <img src="image_6.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" alt="Memory 4" onerror="this.style.display='none'; this.parentElement.innerHTML='Image not found<br>image_6.jpg';">
+            </div>
+            <div class="photocard-caption">Memory 4</div>
+        </div>
+        <div class="photocard" onclick="openPhotoModal(5)">
+            <div class="photocard-inner">
+                <img src="image_7.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" alt="Memory 5" onerror="this.style.display='none'; this.parentElement.innerHTML='Image not found<br>image_7.jpg';">
+            </div>
+            <div class="photocard-caption">Memory 5</div>
+        </div>
+        <div class="photocard" onclick="openPhotoModal(6)">
+            <div class="photocard-inner">
+                <img src="image_8.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" alt="Memory 6" onerror="this.style.display='none'; this.parentElement.innerHTML='Image not found<br>image_8.jpg';">
+            </div>
+            <div class="photocard-caption">Memory 6</div>
+        </div>
+    </div>
+
+    <!-- Photo Card Modal -->
+    <div class="photocard-modal" id="photocardModal" onclick="closePhotoModal()">
+        <div class="photocard-modal-content" onclick="event.stopPropagation()">
+            <div class="modal-close" onclick="closePhotoModal()">×</div>
+            <div class="photocard-modal-placeholder" id="modalContent">
+                Your beautiful memory will appear here ✨
+            </div>
+            <div class="photocard-modal-caption" id="modalCaption">Memory</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Envelope Section -->
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <p class="instruction">Click to open 💌</p>
+            <div class="envelope" id="envelope">
+                <div class="envelope-back"></div>
+                <div class="letter" id="letter">
+                    <img src="image.jpg" class="letter-image" alt="Our Special Photo" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'letter-placeholder\'>Image not found: image.jpg</div>';">
+                </div>
+                <div class="envelope-front">
+                    <span class="envelope-heart heart-1">💕</span>
+                    <span class="envelope-heart heart-2">💖</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content" id="content">
+            <div class="content-close" onclick="closeContent()">×</div>
+            
+            <h1>Will You Be My Valentine?</h1>
+            
+            <div class="flower-bouquet">
+                <img src="image_9.jpg" alt="Bouquet" style="max-width: 200px; max-height: 200px; object-fit: contain; border-radius: 10px;" onerror="this.style.display='none'; this.parentElement.innerHTML='💐';">
+            </div>
+            
+            <p class="message">
+                Say yes bruh noob
+            </p>
+
+            <div class="buttons">
+                <button class="yes-btn" onclick="handleYes()">Yes! 💙</button>
+                <button class="no-btn" onclick="handleNo()">Maybe later 🤔</button>
+            </div>
+
+            <div class="response yes-response" id="yesResponse">
+                FAKE LOVE 
+                <br>I love you so much! 
+            </div>
+
+            <div class="response no-response" id="noResponse">
+                OK bye i got roblox ... 🥺💙
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="music-icon"></div>
+        <div class="music-text">YUHHH FIRE</div>
+        <div class="music-controls">
+            <button class="control-btn" onclick="togglePlay()" id="playBtn">▶️</button>
+            <div class="volume-control">
+                <span class="volume-icon">🔊</span>
+                <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider" oninput="changeVolume(this.value)">
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Hearts Container -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Audio Element (You'll add your BTS playlist here) -->
+    <audio id="music" loop>
+        <source src="Dimple.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Photo URLs mapping
+        const photoUrls = {
+            1: 'image_3.jpg',
+            2: 'image_4.jpg',
+            3: 'image_5.jpg',
+            4: 'image_6.jpg',
+            5: 'image_7.jpg',
+            6: 'image_8.jpg'
+        };
+
+        // Photo Card Modal Functions
+        function openPhotoModal(cardNumber) {
+            console.log('Opening photo modal for card:', cardNumber);
+            const modal = document.getElementById('photocardModal');
+            const modalCaption = document.getElementById('modalCaption');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalCaption.textContent = `Memory ${cardNumber}`;
+            
+            // Show the corresponding image
+            modalContent.innerHTML = `<img src="${photoUrls[cardNumber]}" class="photocard-modal-image" alt="Memory ${cardNumber}">`;
+            
+            modal.classList.add('show');
+            console.log('Modal should be visible now');
+        }
+
+        function closePhotoModal() {
+            console.log('Closing photo modal');
+            const modal = document.getElementById('photocardModal');
+            modal.classList.remove('show');
+        }
+
+        // Close Content and Return to Envelope
+        function closeContent() {
+            const content = document.getElementById('content');
+            const envelopeWrapper = document.getElementById('envelopeWrapper');
+            const envelope = document.getElementById('envelope');
+            const instruction = document.querySelector('.instruction');
+            
+            // Hide content
+            content.classList.remove('show');
+            
+            // Show envelope wrapper again
+            setTimeout(() => {
+                envelopeWrapper.style.display = 'block';
+                envelopeWrapper.classList.remove('hide');
+                
+                // Reset envelope to closed state
+                envelope.classList.remove('open');
+                
+                // Show instruction again
+                instruction.style.display = 'block';
+                instruction.style.opacity = '1';
+            }, 500);
+        }
+
+        // Envelope Opening
+        const envelope = document.getElementById('envelope');
+        const content = document.getElementById('content');
+        const envelopeWrapper = document.getElementById('envelopeWrapper');
+        const instruction = document.querySelector('.instruction');
+
+        envelope.addEventListener('click', function() {
+            envelope.classList.add('open');
+            
+            // Fade out instruction smoothly
+            instruction.style.transition = 'opacity 0.8s ease';
+            instruction.style.opacity = '0';
+            
+            setTimeout(() => {
+                instruction.style.display = 'none';
+            }, 800);
+            
+            // Wait for envelope to fully open, then show content
+            setTimeout(() => {
+                content.classList.add('show');
+                
+                // Smoothly hide envelope wrapper
+                setTimeout(() => {
+                    envelopeWrapper.classList.add('hide');
+                }, 500);
+            }, 1500);
+        });
+
+        // Music Player
+        const music = document.getElementById('music');
+        const playBtn = document.getElementById('playBtn');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const volumeSlider = document.getElementById('volumeSlider');
+        let isPlaying = false;
+
+        // Set initial volume
+        music.volume = 0.7;
+
+        function togglePlay() {
+            if (isPlaying) {
+                music.pause();
+                playBtn.textContent = '▶️';
+                musicPlayer.classList.add('paused');
+            } else {
+                music.play().catch(e => {
+                    console.log('Audio play failed:', e);
+                    alert('Click the play button to start the music! 🎵');
+                });
+                playBtn.textContent = '⏸️';
+                musicPlayer.classList.remove('paused');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function changeVolume(value) {
+            music.volume = value / 100;
+            console.log('Volume set to:', value + '%');
+        }
+
+        // Auto-play attempt (might be blocked by browser)
+        setTimeout(() => {
+            music.play().then(() => {
+                isPlaying = true;
+                playBtn.textContent = '⏸️';
+                musicPlayer.classList.remove('paused');
+            }).catch(e => {
+                console.log('Auto-play blocked - user needs to click play:', e);
+                musicPlayer.classList.add('paused');
+            });
+        }, 2000);
+
+        // Response Handlers
+        function handleYes() {
+            document.getElementById('yesResponse').classList.add('show');
+            document.getElementById('noResponse').classList.remove('show');
+            createHearts();
+        }
+
+        function handleNo() {
+            document.getElementById('noResponse').classList.add('show');
+            document.getElementById('yesResponse').classList.remove('show');
+        }
+
+        // Floating Hearts Animation
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.textContent = '💙';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 100);
+            }
+        }
+
+        // Insert your photo into the envelope
+        // To add your photo, replace the placeholder in the letter div:
+        // document.querySelector('.letter').innerHTML = '<img src="your-photo.jpg" class="letter-image" alt="Our Photo">';
+    </script>
+</body>
+</html>
