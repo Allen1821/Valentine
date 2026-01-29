@@ -834,7 +834,7 @@
 
             <div class="response yes-response" id="yesResponse">
                 Complain too much 
-                <br>I love you so much! 
+                <br>I love you so much! 💕
             </div>
 
             <div class="response no-response" id="noResponse">
@@ -859,8 +859,8 @@
     <!-- Floating Hearts Container -->
     <div class="hearts" id="hearts"></div>
 
-    <!-- Audio Element (You'll add your BTS playlist here) -->
-    <audio id="music" loop>
+    <!-- Audio Element -->
+    <audio id="music" loop autoplay>
         <source src="Dimple.mp3" type="audio/mpeg">
     </audio>
 
@@ -921,6 +921,35 @@
             }, 500);
         }
 
+        // Music Player
+        const music = document.getElementById('music');
+        const playBtn = document.getElementById('playBtn');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const volumeSlider = document.getElementById('volumeSlider');
+        let isPlaying = false;
+
+        // Set initial volume
+        music.volume = 0.7;
+
+        function togglePlay() {
+            if (isPlaying) {
+                music.pause();
+                playBtn.textContent = '▶️';
+                musicPlayer.classList.add('paused');
+            } else {
+                music.play().catch(e => {
+                    console.log('Audio play failed:', e);
+                });
+                playBtn.textContent = '⏸️';
+                musicPlayer.classList.remove('paused');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function changeVolume(value) {
+            music.volume = value / 100;
+        }
+
         // Envelope Opening
         const envelope = document.getElementById('envelope');
         const content = document.getElementById('content');
@@ -929,6 +958,18 @@
 
         envelope.addEventListener('click', function() {
             envelope.classList.add('open');
+            
+            // START MUSIC when envelope is clicked!
+            if (!isPlaying) {
+                music.play().then(() => {
+                    isPlaying = true;
+                    playBtn.textContent = '⏸️';
+                    musicPlayer.classList.remove('paused');
+                    console.log('Music started! 🎵');
+                }).catch(e => {
+                    console.log('Music play failed:', e);
+                });
+            }
             
             // Fade out instruction smoothly
             instruction.style.transition = 'opacity 0.8s ease';
@@ -949,48 +990,16 @@
             }, 1500);
         });
 
-        // Music Player
-        const music = document.getElementById('music');
-        const playBtn = document.getElementById('playBtn');
-        const musicPlayer = document.getElementById('musicPlayer');
-        const volumeSlider = document.getElementById('volumeSlider');
-        let isPlaying = false;
-
-        // Set initial volume
-        music.volume = 0.7;
-
-        function togglePlay() {
-            if (isPlaying) {
-                music.pause();
-                playBtn.textContent = '▶️';
-                musicPlayer.classList.add('paused');
-            } else {
-                music.play().catch(e => {
-                    console.log('Audio play failed:', e);
-                    alert('Click the play button to start the music! 🎵');
-                });
-                playBtn.textContent = '⏸️';
-                musicPlayer.classList.remove('paused');
-            }
-            isPlaying = !isPlaying;
-        }
-
-        function changeVolume(value) {
-            music.volume = value / 100;
-            console.log('Volume set to:', value + '%');
-        }
-
-        // Auto-play attempt (might be blocked by browser)
-        setTimeout(() => {
-            music.play().then(() => {
-                isPlaying = true;
-                playBtn.textContent = '⏸️';
-                musicPlayer.classList.remove('paused');
-            }).catch(e => {
-                console.log('Auto-play blocked - user needs to click play:', e);
-                musicPlayer.classList.add('paused');
-            });
-        }, 2000);
+        // Try to start music on page load (will be blocked, but envelope click will work)
+        music.play().then(() => {
+            isPlaying = true;
+            playBtn.textContent = '⏸️';
+            musicPlayer.classList.remove('paused');
+            console.log('Music auto-started! 🎵');
+        }).catch(e => {
+            console.log('Auto-play blocked (normal) - music will start when envelope is clicked! 🎵');
+            musicPlayer.classList.add('paused');
+        });
 
         // Response Handlers
         function handleYes() {
@@ -1022,10 +1031,6 @@
                 }, i * 100);
             }
         }
-
-        // Insert your photo into the envelope
-        // To add your photo, replace the placeholder in the letter div:
-        // document.querySelector('.letter').innerHTML = '<img src="your-photo.jpg" class="letter-image" alt="Our Photo">';
     </script>
 </body>
 </html>
